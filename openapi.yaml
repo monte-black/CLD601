@@ -5,26 +5,32 @@ info:
 servers:
   - url: https://api.example.com/v1
 paths:
-  /users:
+  /books/{id}/reviews:
     get:
-      summary: List all users
+      summary: Get reviews for a book
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
-          description: A list of users
+          description: A list of reviews
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/Review'
 components:
   schemas:
-    User:
+    Review:
       type: object
       properties:
         id:
           type: string
-        name:
+        content:
           type: string
-        email:
-          type: string
+        rating:
+          type: integer
